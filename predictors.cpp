@@ -29,7 +29,7 @@ vector<int> btb(vector<Branch>);
 int main(int argc, char *argv[]) {
 	//wofstream out(argv[2]);
 	//out<<"Test"<<endl;
-	freopen(argv[2],"w",stdout);
+	ofstream out(argv[2],ofstream::out);
   // Temporary variables
   unsigned long long addr;
   string behavior;
@@ -66,37 +66,43 @@ int main(int argc, char *argv[]) {
   }*/
   //cout<<"-------Predictor Outputs-------"<<endl;
   //function calls:
-  cout<<always_taken(branches)<<","<<branches.size()<<"; "<<endl;
-  cout<<always_nonTaken(branches)<<","<<branches.size()<<"; "<<endl;
+	out<<"Test"<<endl;
+  out<<always_taken(branches)<<","<<branches.size()<<"; "<<endl;
+  out<<always_nonTaken(branches)<<","<<branches.size()<<"; "<<endl;
   //single bimodal
-  cout<<single_bimodal(branches,16)<<","<<branches.size()<<"; ";
-  cout<<single_bimodal(branches,32)<<","<<branches.size()<<"; ";
-  cout<<single_bimodal(branches,128)<<","<<branches.size()<<"; ";
-  cout<<single_bimodal(branches,256)<<","<<branches.size()<<"; ";
-  cout<<single_bimodal(branches,512)<<","<<branches.size()<<"; ";
-  cout<<single_bimodal(branches,1024)<<","<<branches.size()<<"; ";
-  cout<<single_bimodal(branches,2048)<<","<<branches.size()<<"; ";
-	cout<<endl;
+  out<<single_bimodal(branches,16)<<","<<branches.size()<<"; ";
+  out<<single_bimodal(branches,32)<<","<<branches.size()<<"; ";
+  out<<single_bimodal(branches,128)<<","<<branches.size()<<"; ";
+  out<<single_bimodal(branches,256)<<","<<branches.size()<<"; ";
+  out<<single_bimodal(branches,512)<<","<<branches.size()<<"; ";
+  out<<single_bimodal(branches,1024)<<","<<branches.size()<<"; ";
+  out<<single_bimodal(branches,2048)<<","<<branches.size()<<"; ";
+	out<<endl;
   //double bimodal
-  cout<<double_bimodal(branches,16)<<","<<branches.size()<<"; ";
-  cout<<double_bimodal(branches,32)<<","<<branches.size()<<"; ";
-  cout<<double_bimodal(branches,128)<<","<<branches.size()<<"; ";
-  cout<<double_bimodal(branches,256)<<","<<branches.size()<<"; ";
-  cout<<double_bimodal(branches,512)<<","<<branches.size()<<"; ";
-  cout<<double_bimodal(branches,1024)<<","<<branches.size()<<"; ";
-  cout<<double_bimodal(branches,2048)<<","<<branches.size()<<"; ";
-	cout<<endl;
+  out<<double_bimodal(branches,16)<<","<<branches.size()<<"; ";
+  out<<double_bimodal(branches,32)<<","<<branches.size()<<"; ";
+  out<<double_bimodal(branches,128)<<","<<branches.size()<<"; ";
+  out<<double_bimodal(branches,256)<<","<<branches.size()<<"; ";
+  out<<double_bimodal(branches,512)<<","<<branches.size()<<"; ";
+  out<<double_bimodal(branches,1024)<<","<<branches.size()<<"; ";
+  out<<double_bimodal(branches,2048)<<","<<branches.size()<<"; ";
+	out<<endl;
   //gshare
-  for (int i=3;i<12;i++){
-	  cout<<gshare(branches,i)<<","<<branches.size()<<"; ";
-  }
-	cout<<endl;
+	out<<gshare(branches,3)<<","<<branches.size()<<"; "<<endl;
+  /*for (int i=3;i<12;i++){
+	  out<<gshare(branches,i)<<","<<branches.size()<<"; ";
+  }*/
+	out<<"Test"<<endl;
+	out<<endl;
   //tournament
-  cout<<tournament(branches)<<","<<branches.size()<<"; "<<endl;
+	out<<"Test"<<endl;
+  out<<tournament(branches)<<","<<branches.size()<<"; "<<endl;
 	//BTB
+	out<<"Test before"<<endl;
 	vector<int> BTB = btb(branches);
-	cout<<BTB[0]<<","<<BTB[1]<<"; "<<endl;
-
+	out<<BTB[0]<<","<<BTB[1]<<"; "<<endl;
+	//fclose(stdout);
+	out.close();
   return 0;
 }
 int always_taken(vector<Branch> v){
@@ -109,6 +115,7 @@ int always_taken(vector<Branch> v){
        //will be changed to writing to output file, just printing for now...
        //cout<<"Always Taken: "<<accurate<<","<<v.size()<<endl;
 			 //out<<"accurate"<<","<<v.size()<<";"<<endl;
+			 cout<<"Always taken ran"<<endl;
 	return accurate;
 }
 int always_nonTaken(vector<Branch> v){
@@ -121,6 +128,7 @@ int always_nonTaken(vector<Branch> v){
 	//will be changed to writing to output file, just printing for now...
 	//cout<<"Always Non-Taken: "<<accurate<<","<<v.size()<<endl;
 	//out<<"accurate"<<","<<v.size()<<";"<<endl;
+	cout<<"Always non-taken ran"<<endl;
 	return accurate;
 
 }
@@ -205,6 +213,7 @@ int single_bimodal(vector<Branch> v, int size){
 	}
 	//cout<<"Single bimodal"<<"("<<size<<"): "<<accurate<<","<<v.size()<<endl;
 	//out<<accurate<<","<<v.size()<<": "
+	cout<<"Single bimodal ran"<<endl;
 	return accurate;
 }
 int double_bimodal(vector<Branch>v, int size){
@@ -334,6 +343,7 @@ int double_bimodal(vector<Branch>v, int size){
 
 	//cout<<"Double bimodal"<<"("<<size<<"): "<<accurate<<","<<v.size()<<endl;
 	//out<<accurate<<","<<v.size()<<"; ";
+	cout<<"Double bimodal ran"<<endl;
 	return accurate;
 
 
@@ -421,6 +431,7 @@ int gshare(vector<Branch>v, int size){
 	for (int i = 0; i<2048; i++){
 		predictions[i] = "TT";
 	}
+	cout<<"gshare initialized properly"<<endl;
 	switch (size){
 		case 3:
 			for(int i = 0; i<v.size(); i++){
@@ -434,6 +445,7 @@ int gshare(vector<Branch>v, int size){
 					else if(predictions[index] == "NTNT" || predictions[index] =="NT"){// branch is taken, and the prediction is wrong
 						predictions[index] = change_state(predictions[index],v[i].getBehavior());
 					}
+					//cout<<predictions[index]<<endl;
 					unsigned long long temp = GHR<<1;
 					unsigned long long temp2 = temp | 0x00000001;
 					GHR =temp2 & 0x00000007;
@@ -449,10 +461,12 @@ int gshare(vector<Branch>v, int size){
 
 
 					}
+					//cout<<"index calculated properly"<<endl;
 					unsigned long long temp = GHR<<1;
 					GHR= temp & 0x00000007;
 				}
 			}
+			cout<<"index and gshare calculated properly"<<endl;
 			//cout<<"gshare"<<"("<<size<<"): "<<accurate<<","<<v.size()<<endl;
 		break;
 		case 4:
@@ -722,6 +736,7 @@ int gshare(vector<Branch>v, int size){
 	}
 	//cout<<"gshare"<<"("<<size<<"): "<<accurate<<","<<v.size()<<endl;
 	//out<<accurate<<","<<v.size()<<"; ";
+	cout<<"Gshare ran"<<endl;
 	return accurate;
 
 
@@ -788,7 +803,7 @@ void gshare2(vector<Branch>v){	//gshare predictor participating in the tournamet
 		}
 	}
 }
-int update(bool b, int state){
+/*int update(bool b, int state){
 	switch (state){
 		case 3:
 			if (b == true){
@@ -821,7 +836,7 @@ int update(bool b, int state){
 				return 0; //stay in strongly bimodal
 			}
 	}
-}
+}*/
 
 /*void tournament(vector<Branch>v){
 	//3 - strongly prefer gshare
@@ -1006,6 +1021,7 @@ int tournament(vector<Branch>v){
 	}
   //cout<<"Tournament: "<<accurate<<endl;
 	//out<<accurate<<","<<v.size()<<";"<<endl;
+	cout<<"Tournament ran"<<endl;
 	return accurate;
 }
 
@@ -1042,5 +1058,6 @@ vector<int> btb(vector<Branch>v){
 	//cout<<accurate<<","<<attempts<<";"<<endl;
 	retval.push_back(accurate);
 	retval.push_back(attempts);
+	cout<<"BTB ran"<<endl;
 	return retval;
 }

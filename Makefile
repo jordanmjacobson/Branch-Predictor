@@ -17,4 +17,4 @@ clean:
 	rm -rf output.txt
 
 run: all
-	./predictors short_trace1.txt output.txt
+	./predictors long_trace1.txt output.txt
