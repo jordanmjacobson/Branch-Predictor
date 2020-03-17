@@ -66,7 +66,7 @@ int main(int argc, char *argv[]) {
   }*/
   //cout<<"-------Predictor Outputs-------"<<endl;
   //function calls:
-	out<<"Test"<<endl;
+	//out<<"Test"<<endl;
   out<<always_taken(branches)<<","<<branches.size()<<"; "<<endl;
   out<<always_nonTaken(branches)<<","<<branches.size()<<"; "<<endl;
   //single bimodal
@@ -88,17 +88,17 @@ int main(int argc, char *argv[]) {
   out<<double_bimodal(branches,2048)<<","<<branches.size()<<"; ";
 	out<<endl;
   //gshare
-	out<<gshare(branches,3)<<","<<branches.size()<<"; "<<endl;
-  /*for (int i=3;i<12;i++){
+	//out<<gshare(branches,3)<<","<<branches.size()<<"; "<<endl;
+  for (int i=3;i<12;i++){
 	  out<<gshare(branches,i)<<","<<branches.size()<<"; ";
-  }*/
-	out<<"Test"<<endl;
+  }
+	//out<<"Test"<<endl;
 	out<<endl;
   //tournament
-	out<<"Test"<<endl;
+	//out<<"Test"<<endl;
   out<<tournament(branches)<<","<<branches.size()<<"; "<<endl;
 	//BTB
-	out<<"Test before"<<endl;
+	//out<<"Test before"<<endl;
 	vector<int> BTB = btb(branches);
 	out<<BTB[0]<<","<<BTB[1]<<"; "<<endl;
 	//fclose(stdout);
@@ -115,7 +115,7 @@ int always_taken(vector<Branch> v){
        //will be changed to writing to output file, just printing for now...
        //cout<<"Always Taken: "<<accurate<<","<<v.size()<<endl;
 			 //out<<"accurate"<<","<<v.size()<<";"<<endl;
-			 cout<<"Always taken ran"<<endl;
+			 //cout<<"Always taken ran"<<endl;
 	return accurate;
 }
 int always_nonTaken(vector<Branch> v){
@@ -128,7 +128,7 @@ int always_nonTaken(vector<Branch> v){
 	//will be changed to writing to output file, just printing for now...
 	//cout<<"Always Non-Taken: "<<accurate<<","<<v.size()<<endl;
 	//out<<"accurate"<<","<<v.size()<<";"<<endl;
-	cout<<"Always non-taken ran"<<endl;
+	//cout<<"Always non-taken ran"<<endl;
 	return accurate;
 
 }
@@ -213,7 +213,7 @@ int single_bimodal(vector<Branch> v, int size){
 	}
 	//cout<<"Single bimodal"<<"("<<size<<"): "<<accurate<<","<<v.size()<<endl;
 	//out<<accurate<<","<<v.size()<<": "
-	cout<<"Single bimodal ran"<<endl;
+	//cout<<"Single bimodal ran"<<endl;
 	return accurate;
 }
 int double_bimodal(vector<Branch>v, int size){
@@ -343,7 +343,7 @@ int double_bimodal(vector<Branch>v, int size){
 
 	//cout<<"Double bimodal"<<"("<<size<<"): "<<accurate<<","<<v.size()<<endl;
 	//out<<accurate<<","<<v.size()<<"; ";
-	cout<<"Double bimodal ran"<<endl;
+	//cout<<"Double bimodal ran"<<endl;
 	return accurate;
 
 
@@ -431,7 +431,7 @@ int gshare(vector<Branch>v, int size){
 	for (int i = 0; i<2048; i++){
 		predictions[i] = "TT";
 	}
-	cout<<"gshare initialized properly"<<endl;
+	//cout<<"gshare initialized properly"<<endl;
 	switch (size){
 		case 3:
 			for(int i = 0; i<v.size(); i++){
@@ -466,12 +466,12 @@ int gshare(vector<Branch>v, int size){
 					GHR= temp & 0x00000007;
 				}
 			}
-			cout<<"index and gshare calculated properly"<<endl;
+			//cout<<"index and gshare calculated properly"<<endl;
 			//cout<<"gshare"<<"("<<size<<"): "<<accurate<<","<<v.size()<<endl;
 		break;
 		case 4:
 			for(int i = 0; i<v.size(); i++){
-				int addr_mod = v[i].getAddress() % 2048;
+				unsigned long long addr_mod = v[i].getAddress() % 2048;
 				index = addr_mod^GHR;
 				if(v[i].getBehavior() == "T"){ //branch is taken
 					if(predictions[index] == "TT" ||predictions[index] == "T"){//if the branch is taken, and the prediction is right
@@ -504,7 +504,7 @@ int gshare(vector<Branch>v, int size){
 		break;
 		case 5:
 			for(int i = 0; i<v.size(); i++){
-				int addr_mod = v[i].getAddress() % 2048;
+				unsigned long long addr_mod = v[i].getAddress() % 2048;
 				index = addr_mod^GHR;
 				if(v[i].getBehavior() == "T"){ //branch is taken
 					if(predictions[index] == "TT" ||predictions[index] == "T"){//if the branch is taken, and the prediction is right
@@ -537,7 +537,7 @@ int gshare(vector<Branch>v, int size){
 		break;
 		case 6:
 			for(int i = 0; i<v.size(); i++){
-				int addr_mod = v[i].getAddress() % 2048;
+				unsigned long long addr_mod = v[i].getAddress() % 2048;
 				index = addr_mod^GHR;
 				if(v[i].getBehavior() == "T"){ //branch is taken
 					if(predictions[index] == "TT" ||predictions[index] == "T"){//if the branch is taken, and the prediction is right
@@ -570,7 +570,7 @@ int gshare(vector<Branch>v, int size){
 		break;
 		case 7:
 			for(int i = 0; i<v.size(); i++){
-				int addr_mod = v[i].getAddress() % 2048;
+				unsigned long long addr_mod = v[i].getAddress() % 2048;
 				index = addr_mod^GHR;
 				if(v[i].getBehavior() == "T"){ //branch is taken
 					if(predictions[index] == "TT" ||predictions[index] == "T"){//if the branch is taken, and the prediction is right
@@ -603,7 +603,7 @@ int gshare(vector<Branch>v, int size){
 		break;
 		case 8:
 			for(int i = 0; i<v.size(); i++){
-				int addr_mod = v[i].getAddress() % 2048;
+				unsigned long long addr_mod = v[i].getAddress() % 2048;
 				index = addr_mod^GHR;
 				if(v[i].getBehavior() == "T"){ //branch is taken
 					if(predictions[index] == "TT" ||predictions[index] == "T"){//if the branch is taken, and the prediction is right
@@ -636,7 +636,7 @@ int gshare(vector<Branch>v, int size){
 		break;
 		case 9:
 			for(int i = 0; i<v.size(); i++){
-				int addr_mod = v[i].getAddress() % 2048;
+				unsigned long long addr_mod = v[i].getAddress() % 2048;
 				index = addr_mod^GHR;
 				if(v[i].getBehavior() == "T"){ //branch is taken
 					if(predictions[index] == "TT" ||predictions[index] == "T"){//if the branch is taken, and the prediction is right
@@ -669,7 +669,7 @@ int gshare(vector<Branch>v, int size){
 		break;
 		case 10:
 			for(int i = 0; i<v.size(); i++){
-				int addr_mod = v[i].getAddress() % 2048;
+				unsigned long long addr_mod = v[i].getAddress() % 2048;
 				index = addr_mod^GHR;
 				if(v[i].getBehavior() == "T"){ //branch is taken
 					if(predictions[index] == "TT" ||predictions[index] == "T"){//if the branch is taken, and the prediction is right
@@ -702,7 +702,7 @@ int gshare(vector<Branch>v, int size){
 		break;
 		case 11:
 			for(int i = 0; i<v.size(); i++){
-				int addr_mod = v[i].getAddress() % 2048;
+				unsigned long long addr_mod = v[i].getAddress() % 2048;
 				index = addr_mod^GHR;
 				if(v[i].getBehavior() == "T"){ //branch is taken
 					if(predictions[index] == "TT" ||predictions[index] == "T"){//if the branch is taken, and the prediction is right
@@ -736,7 +736,7 @@ int gshare(vector<Branch>v, int size){
 	}
 	//cout<<"gshare"<<"("<<size<<"): "<<accurate<<","<<v.size()<<endl;
 	//out<<accurate<<","<<v.size()<<"; ";
-	cout<<"Gshare ran"<<endl;
+	//cout<<"Gshare ran"<<endl;
 	return accurate;
 
 
@@ -1021,7 +1021,7 @@ int tournament(vector<Branch>v){
 	}
   //cout<<"Tournament: "<<accurate<<endl;
 	//out<<accurate<<","<<v.size()<<";"<<endl;
-	cout<<"Tournament ran"<<endl;
+	//cout<<"Tournament ran"<<endl;
 	return accurate;
 }
 
@@ -1058,6 +1058,6 @@ vector<int> btb(vector<Branch>v){
 	//cout<<accurate<<","<<attempts<<";"<<endl;
 	retval.push_back(accurate);
 	retval.push_back(attempts);
-	cout<<"BTB ran"<<endl;
+	//cout<<"BTB ran"<<endl;
 	return retval;
 }
