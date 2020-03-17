@@ -17,10 +17,10 @@
 	std::string Branch::getBehavior(){
 		return this->behavior;
 	}
-	int Branch::getTarget(){
+	unsigned long long Branch::getTarget(){
 		return this->target;
 	}
-	int Branch::getAddress(){
+	unsigned long long Branch::getAddress(){
 		return this->addr;
 	}
 	bool Branch::getbimodal(){
@@ -33,4 +33,3 @@
 		this->behavior = "NT";
 		this->target = 0;
 	}
-
