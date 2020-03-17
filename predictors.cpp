@@ -425,7 +425,7 @@ string change_state(string pred, string outcome){
 int gshare(vector<Branch>v, int size){
 	int accurate  = 0;
 	string predictions[2048];
-	int index = 0;
+	unsigned long long index = 0;
 	unsigned long long GHR = 0;
 	//initialize all table values to strongly taken
 	for (int i = 0; i<2048; i++){
