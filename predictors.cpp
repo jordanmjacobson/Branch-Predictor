@@ -435,7 +435,7 @@ int gshare(vector<Branch>v, int size){
 	switch (size){
 		case 3:
 			for(int i = 0; i<v.size(); i++){
-				int addr_mod = v[i].getAddress() % 2048;
+				unsigned long long addr_mod = v[i].getAddress() % 2048;
 				index = addr_mod^GHR;
 				if(v[i].getBehavior() == "T"){ //branch is taken
 					if(predictions[index] == "TT" ||predictions[index] == "T"){//if the branch is taken, and the prediction is right
