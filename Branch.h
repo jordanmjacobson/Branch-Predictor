@@ -8,7 +8,7 @@ class Branch {
 
 	std::string behavior;
 	unsigned long long target;
-	unsigned long lont addr;
+	unsigned long long addr;
 	bool b = false; //for bimodal in tournament. True if the bimodal predicts this branch correctly
 	bool g = false; //for g-share in tournament. True if the g-share predicts this branch correctly
 	public:
